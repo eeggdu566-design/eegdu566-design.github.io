@@ -1,0 +1,1087 @@
+```html
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AZAT GAMING | PUBG Mobile Hesap Vitrini</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@800;900&family=Rajdhani:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #090a0b;
+      --header-bg: #0b0d0e;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-main);
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Arka Plan Kırmızı/Siyah Radyal Geçiş (Referans Görsel 1 & 2) */
+    .ambient-bg {
+      background: radial-gradient(circle at 50% 0%, rgba(120, 20, 28, 0.34) 0%, rgba(45, 11, 15, 0.16) 35%, #090a0b 75%);
+      min-height: 100vh;
+    }
+
+    /* Kart Gradyanları (Referans Görsel 1) */
+    .card-buy {
+      background: linear-gradient(135deg, #2b1215 0%, #140c0d 100%);
+      border: 1px solid rgba(220, 38, 38, 0.22);
+    }
+    .card-buy:hover, .card-buy:active {
+      border-color: rgba(239, 68, 68, 0.55);
+      box-shadow: 0 8px 30px rgba(220, 38, 38, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .card-sell {
+      background: linear-gradient(135deg, #101c2e 0%, #0c1017 100%);
+      border: 1px solid rgba(59, 130, 246, 0.22);
+    }
+    .card-sell:hover, .card-sell:active {
+      border-color: rgba(59, 130, 246, 0.55);
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .card-rent {
+      background: linear-gradient(135deg, #0f2419 0%, #0b120e 100%);
+      border: 1px solid rgba(34, 197, 94, 0.22);
+    }
+    .card-rent:hover, .card-rent:active {
+      border-color: rgba(34, 197, 94, 0.55);
+      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* Vitrin Filtre Kutusu (Referans Görsel 2) */
+    .filter-banner-box {
+      background: linear-gradient(135deg, rgba(45, 13, 17, 0.75) 0%, rgba(18, 11, 12, 0.9) 100%);
+      border: 1px solid #5c1d24;
+    }
+
+    /* İlan Kartı Alt Detay Çerçevesi (Referans Görsel 2) */
+    .listing-footer-box {
+      background: linear-gradient(180deg, #190d0f 0%, #111214 100%);
+      border-top: 2px solid #dc2626;
+      border-left: 1px solid rgba(220, 38, 38, 0.28);
+      border-right: 1px solid rgba(220, 38, 38, 0.28);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Filigran (Watermark) Efekti */
+    .watermark-overlay {
+      background-image: repeating-linear-gradient(
+        -28deg,
+        transparent,
+        transparent 55px,
+        rgba(255, 255, 255, 0.04) 55px,
+        rgba(255, 255, 255, 0.04) 56px
+      );
+    }
+
+    /* Özel Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090a0b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-view {
+      animation: fadeSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="ambient-bg selection:bg-red-600 selection:text-white">
+
+  <!-- =========================================================
+       ÜST SABİT HEADER (STICKY NAVBAR)
+  ========================================================== -->
+  <header class="sticky top-0 z-40 bg-[#0b0d0e]/95 backdrop-blur-md border-b border-white/[0.07]">
+    <div class="max-w-lg mx-auto px-3.5 h-16 flex items-center justify-between gap-2">
+      <!-- Sol: AZAT GAMING E-Spor Logo -->
+      <button onclick="navigateTo('home')" class="flex items-center focus:outline-none group text-left" aria-label="AZAT GAMING Ana Sayfa">
+        <div id="header-logo-container" class="transform group-active:scale-95 transition-transform"></div>
+      </button>
+
+      <!-- Sağ: Aksiyon Butonları -->
+      <div class="flex items-center gap-2">
+        <!-- Vitrin Sayfasında Görünen 'Hesap Sat' Butonu -->
+        <a id="header-sell-btn" href="https://wa.me/905301759556?text=Merhaba%2C%20PUBG%20Mobile%20hesab%C4%B1m%C4%B1%20satmak%20istiyorum." target="_blank" rel="noopener noreferrer"
+           class="hidden text-[11px] leading-tight font-semibold text-gray-200 bg-[#140e0f] hover:bg-[#1f1214] border border-[#5c1d24] rounded-lg px-2.5 py-1.5 text-center transition-colors">
+          Hesap<br>Sat
+        </a>
+
+        <!-- Hızlı Fotoğraf / İlan Ekle Butonu -->
+        <button onclick="openAddModal()" title="Yeni İlan / Fotoğraf Ekle" class="text-xs font-semibold text-gray-200 bg-white/[0.07] hover:bg-white/[0.12] border border-white/10 rounded-lg px-2.5 py-2 flex items-center gap-1 transition-colors">
+          <svg class="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          <span class="hidden sm:inline">İlan Ekle</span>
+        </button>
+
+        <!-- WhatsApp Butonu (+905301759556) -->
+        <a href="https://wa.me/905301759556?text=Merhaba%20AZAT%20GAMING%2C%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer"
+           class="bg-[#22c55e] hover:bg-[#16a34a] active:scale-95 text-[#052e16] font-bold text-xs sm:text-sm px-3.5 py-2 rounded-lg shadow-lg shadow-green-500/15 transition-all">
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       GÖRÜNÜM 1: ANA SAYFA (LANDING PAGE)
+  ========================================================== -->
+  <main id="view-home" class="max-w-lg mx-auto px-4 pt-10 pb-16 animate-view">
+    <!-- Merkez Büyük Logo -->
+    <div class="flex flex-col items-center text-center mb-9">
+      <div id="hero-logo-container" class="mb-6 transform scale-105 sm:scale-115"></div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-2">
+        Hoşgeldiniz
+      </h1>
+      <p class="text-sm sm:text-base text-gray-400 font-normal">
+        Hangi hizmetimizden yararlanmak istiyorsunuz?
+      </p>
+    </div>
+
+    <!-- 3 Hizmet Kartı (Referans Görsel 1) -->
+    <div class="space-y-4">
+      <!-- Kart 1: Hesap Satın Almak İstiyorum -->
+      <div onclick="navigateTo('vitrin')" role="button" tabindex="0"
+           class="card-buy rounded-2xl p-6 cursor-pointer transition-all duration-200 select-none">
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-1.5">
+          Hesap Satın Almak İstiyorum
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-400 mb-5">
+          Hazır PUBG Mobile hesap vitrinine göz at.
+        </p>
+        <div class="inline-flex items-center gap-1.5 text-sm font-semibold text-white group">
+          <span>Devam</span>
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </div>
+      </div>
+
+      <!-- Kart 2: Hesap Satmak İstiyorum -> Doğrudan WhatsApp (+905301759556) -->
+      <a href="https://wa.me/905301759556?text=Merhaba%2C%20PUBG%20Mobile%20hesab%C4%B1m%C4%B1%20satmak%20istiyorum."
+         target="_blank" rel="noopener noreferrer"
+         onclick="showToast('WhatsApp satış hattına yönlendiriliyorsunuz...')"
+         class="block card-sell rounded-2xl p-6 cursor-pointer transition-all duration-200 select-none">
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-1.5">
+          Hesap Satmak İstiyorum
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-400 mb-5">
+          Video çek, WhatsApp üzerinden bizimle paylaş.
+        </p>
+        <div class="inline-flex items-center gap-1.5 text-sm font-semibold text-white group">
+          <span>Devam</span>
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </div>
+      </a>
+
+      <!-- Kart 3: Hesap Kiralamak İstiyorum -> Doğrudan Telegram (https://t.me/azatrentgmng) -->
+      <a href="https://t.me/azatrentgmng"
+         target="_blank" rel="noopener noreferrer"
+         onclick="showToast('Telegram kiralama kanalına yönlendiriliyorsunuz...')"
+         class="block card-rent rounded-2xl p-6 cursor-pointer transition-all duration-200 select-none">
+        <h2 class="text-lg sm:text-xl font-bold text-white mb-1.5">
+          Hesap Kiralamak İstiyorum
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-400 mb-5">
+          Şimdilik Telegram kanalımız üzerinden.
+        </p>
+        <div class="inline-flex items-center gap-1.5 text-sm font-semibold text-white group">
+          <span>Devam</span>
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Alt Bilgi -->
+    <div class="mt-12 text-center text-xs text-gray-500">
+      <p>© 2026 AZAT GAMING • Güvenilir PUBG Mobile Hesap Pazarı</p>
+    </div>
+  </main>
+
+  <!-- =========================================================
+       GÖRÜNÜM 2: PUBG MOBILE HESAP VİTRİNİ (SHOWCASE)
+  ========================================================== -->
+  <section id="view-vitrin" class="hidden max-w-lg mx-auto px-4 pt-5 pb-20 animate-view">
+    <!-- Geri Dön Breadcrumb -->
+    <button onclick="navigateTo('home')" class="inline-flex items-center gap-1.5 text-xs sm:text-sm text-gray-400 hover:text-white mb-3 transition-colors">
+      <span>←</span>
+      <span>Ana sayfa</span>
+    </button>
+
+    <!-- Kırmızı Büyük Başlık -->
+    <h1 class="text-2xl sm:text-[28px] font-extrabold text-[#ef233c] tracking-tight mb-5">
+      PUBG Mobile Hesap Vitrini
+    </h1>
+
+    <!-- Filtre Banner Kutusu (Referans Görsel 2) -->
+    <div class="filter-banner-box rounded-2xl p-4 sm:p-5 mb-7 flex items-center justify-between gap-3">
+      <div class="flex-1">
+        <h2 class="text-sm sm:text-base font-bold text-white leading-snug mb-1">
+          Hangi özelliklere sahip hesap arıyorsun?
+        </h2>
+        <p class="text-[11px] sm:text-xs text-gray-400 leading-relaxed">
+          İstediğin hesap türüne göre filtreleme yapabilirsin!
+        </p>
+      </div>
+      <button onclick="openModal('filterModal')"
+              class="shrink-0 bg-[#e11d2e] hover:bg-[#c81424] active:scale-95 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-red-600/25 transition-all">
+        Filtrele
+      </button>
+    </div>
+
+    <!-- Satılık Hesaplar Başlık & Aktif İlan Sayısı -->
+    <div class="text-center mb-4">
+      <h2 class="text-lg sm:text-xl font-bold text-white">Satılık Hesaplar</h2>
+      <p id="active-count-text" class="text-xs sm:text-sm text-gray-400 mt-0.5">4 aktif ilan</p>
+    </div>
+
+    <!-- Kategori Filtre Hapları (Pills) -->
+    <div id="category-pills" class="flex flex-wrap items-center justify-center gap-2 mb-6">
+      <button data-cat="all" onclick="setCategoryFilter('all')"
+              class="cat-pill active-pill px-3.5 py-2 rounded-xl text-xs font-medium bg-[#e11d2e] text-white border border-red-500/40 transition-all">
+        Tümü
+      </button>
+      <button data-cat="yeni" onclick="setCategoryFilter('yeni')"
+              class="cat-pill px-3.5 py-2 rounded-xl text-xs font-medium bg-[#18191c] text-gray-300 hover:bg-[#222428] border border-white/[0.06] transition-all">
+        Yeni İlanlar
+      </button>
+      <button data-cat="firsat" onclick="setCategoryFilter('firsat')"
+              class="cat-pill px-3.5 py-2 rounded-xl text-xs font-medium bg-[#18191c] text-gray-300 hover:bg-[#222428] border border-white/[0.06] transition-all">
+        Günün Fırsatı
+      </button>
+      <button data-cat="indirim" onclick="setCategoryFilter('indirim')"
+              class="cat-pill px-3.5 py-2 rounded-xl text-xs font-medium bg-[#18191c] text-gray-300 hover:bg-[#222428] border border-white/[0.06] transition-all">
+        İndirimli İlanlar
+      </button>
+      <button data-cat="populer" onclick="setCategoryFilter('populer')"
+              class="cat-pill px-3.5 py-2 rounded-xl text-xs font-medium bg-[#18191c] text-gray-300 hover:bg-[#222428] border border-white/[0.06] transition-all">
+        Popüler İlanlar
+      </button>
+      <button data-cat="satildi" onclick="setCategoryFilter('satildi')"
+              class="cat-pill px-3.5 py-2 rounded-xl text-xs font-medium bg-[#18191c] text-gray-300 hover:bg-[#222428] border border-white/[0.06] transition-all">
+        Satılmış Hesaplar
+      </button>
+    </div>
+
+    <!-- Kullanıcı İçin Hızlı Fotoğraf / İlan Ekleme Çubuğu -->
+    <div class="mb-7 flex items-center justify-between gap-2 bg-[#121417] border border-dashed border-white/15 rounded-xl p-3">
+      <div class="text-xs text-gray-300">
+        <span class="font-semibold text-white block">Vitrin Yönetimi</span>
+        <span class="text-[11px] text-gray-400">Kendi hesap fotoğraflarını yükle veya düzenle</span>
+      </div>
+      <button onclick="openAddModal()"
+              class="shrink-0 bg-white/10 hover:bg-white/15 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10 flex items-center gap-1.5 transition-colors">
+        <span>📷</span>
+        <span>Yeni İlan / Fotoğraf</span>
+      </button>
+    </div>
+
+    <!-- İlan Kartları Listesi -->
+    <div id="listings-container" class="space-y-8">
+      <!-- JavaScript tarafından dinamik doldurulacak -->
+    </div>
+
+    <!-- Boş Sonuç Durumu -->
+    <div id="empty-state" class="hidden text-center py-12 bg-[#111215] rounded-2xl border border-white/5">
+      <p class="text-gray-400 text-sm mb-3">Bu filtreye uygun hesap ilanı bulunamadı.</p>
+      <button onclick="resetAllFilters()" class="text-xs font-semibold bg-red-600 text-white px-4 py-2 rounded-lg">
+        Filtreleri Temizle
+      </button>
+    </div>
+  </section>
+
+  <!-- Gizli Tekil Fotoğraf Değiştirme Inputu -->
+  <input type="file" id="quick-photo-input" accept="image/*" class="hidden" onchange="handleQuickPhotoChange(event)" />
+
+  <!-- =========================================================
+       MODAL 1: HESAP DETAY MODALI
+  ========================================================== -->
+  <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-[#111316] border border-white/10 w-full max-w-lg rounded-t-3xl sm:rounded-2xl overflow-hidden shadow-2xl max-h-[92vh] flex flex-col">
+      <!-- Üst Bar -->
+      <div class="px-5 py-3.5 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span id="modal-detail-id" class="text-xs font-mono font-bold bg-black/60 text-gray-200 px-2.5 py-1 rounded-md border border-white/10">#090412</span>
+          <span id="modal-detail-badge" class="text-[11px] font-bold px-2.5 py-0.5 rounded bg-emerald-600 text-white">YENİ</span>
+        </div>
+        <button onclick="closeModal('detailModal')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-300">✕</button>
+      </div>
+
+      <!-- İçerik -->
+      <div class="overflow-y-auto p-5 space-y-4">
+        <div class="relative rounded-xl overflow-hidden border border-white/10 bg-black aspect-[16/10]">
+          <img id="modal-detail-img" src="" alt="Hesap Görseli" class="w-full h-full object-cover" />
+          <div class="absolute bottom-2 right-2 bg-black/75 backdrop-blur-sm px-2.5 py-1 rounded text-[11px] font-bold text-white/80">
+            AZAT GAMING
+          </div>
+        </div>
+
+        <div>
+          <span class="text-[11px] font-bold tracking-wider uppercase text-red-500">İLAN BAŞLIĞI</span>
+          <h3 id="modal-detail-title" class="text-lg font-extrabold text-white mt-0.5"></h3>
+        </div>
+
+        <div class="flex items-center justify-between bg-white/[0.04] rounded-xl p-3.5 border border-white/[0.07]">
+          <span class="text-xs text-gray-400">Satış Fiyatı</span>
+          <span id="modal-detail-price" class="text-xl font-extrabold text-emerald-400"></span>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Hesap Özellikleri & Destansılar</h4>
+          <div id="modal-detail-specs" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <p id="modal-detail-desc" class="text-xs text-gray-400 leading-relaxed bg-black/30 p-3 rounded-xl border border-white/5"></p>
+      </div>
+
+      <!-- Alt Butonlar -->
+      <div class="p-4 border-t border-white/10 bg-[#0c0d0f] flex items-center gap-2.5">
+        <button id="modal-swap-photo-btn" class="px-3.5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-gray-200 transition-colors">
+          📷 Fotoğraf Değiştir
+        </button>
+        <a id="modal-whatsapp-link" href="#" target="_blank" rel="noopener noreferrer"
+           class="flex-1 bg-[#22c55e] hover:bg-[#16a34a] text-[#052e16] font-extrabold text-sm py-3 px-4 rounded-xl text-center shadow-lg shadow-green-500/20 transition-all">
+          WhatsApp ile Satın Al
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 2: YENİ İLAN / FOTOĞRAF EKLEME MODALI
+  ========================================================== -->
+  <div id="addModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-[#111316] border border-white/10 w-full max-w-lg rounded-t-3xl sm:rounded-2xl overflow-hidden shadow-2xl max-h-[92vh] flex flex-col">
+      <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between">
+        <h3 class="text-base font-bold text-white">Yeni Hesap İlanı & Fotoğraf Ekle</h3>
+        <button onclick="closeModal('addModal')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-300">✕</button>
+      </div>
+
+      <form onsubmit="handleAddAccount(event)" class="overflow-y-auto p-5 space-y-4">
+        <!-- Fotoğraf Yükleme Alanı -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1.5">Hesap Ekran Görüntüsü (Fotoğraf Seç)</label>
+          <label for="new-photo-file" class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-red-500/40 hover:border-red-500 rounded-2xl bg-[#181213] cursor-pointer overflow-hidden relative transition-colors">
+            <img id="new-photo-preview" src="" alt="Önizleme" class="hidden w-full h-full object-cover" />
+            <div id="new-photo-placeholder" class="text-center p-4">
+              <span class="text-2xl block mb-1">📸</span>
+              <span class="text-xs font-semibold text-white block">Galeriden Fotoğraf Seçin</span>
+              <span class="text-[11px] text-gray-400">PNG, JPG veya WEBP</span>
+            </div>
+          </label>
+          <input type="file" id="new-photo-file" accept="image/*" class="hidden" onchange="previewNewPhoto(event)" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">İlan Kodu (ID)</label>
+            <input type="text" id="new-id" placeholder="#090455" required
+                   class="w-full bg-[#181a1f] border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-red-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">Kategori / Etiket</label>
+            <select id="new-category" class="w-full bg-[#181a1f] border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-red-500">
+              <option value="yeni">Yeni İlanlar (YENİ)</option>
+              <option value="firsat">Günün Fırsatı (FIRSAT)</option>
+              <option value="indirim">İndirimli İlanlar (İNDİRİM)</option>
+              <option value="populer">Popüler İlanlar (POPÜLER)</option>
+              <option value="satildi">Satılmış Hesaplar (SATILDI)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1">İlan Başlığı</label>
+          <input type="text" id="new-title" placeholder="Örn: 2x M4( BUZ MAX ) + 2 XSUIT" required
+                 class="w-full bg-[#181a1f] border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-red-500" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">Fiyat (₺)</label>
+            <input type="text" id="new-price" placeholder="Örn: 14.500 ₺" required
+                   class="w-full bg-[#181a1f] border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-red-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">Özellikler (Virgülle)</label>
+            <input type="text" id="new-specs" placeholder="Buz M4 Sv.7, Firavun, 82 Sv."
+                   class="w-full bg-[#181a1f] border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-red-500" />
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-[#e11d2e] hover:bg-[#c81424] text-white font-bold text-sm py-3.5 rounded-xl shadow-lg shadow-red-600/25 transition-all">
+          İlanı Vitrine Ekle
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 3: FİLTRELEME MODALI
+  ========================================================== -->
+  <div id="filterModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-[#111316] border border-white/10 w-full max-w-lg rounded-t-3xl sm:rounded-2xl overflow-hidden shadow-2xl">
+      <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between">
+        <h3 class="text-base font-bold text-white">Detaylı Hesap Filtrele</h3>
+        <button onclick="closeModal('filterModal')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-300">✕</button>
+      </div>
+      <div class="p-5 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 mb-1.5">Silah, Kostüm veya İlan No Ara</label>
+          <input type="text" id="search-input" placeholder="Örn: Buz Max, X-Suit, M416, #090412..."
+                 class="w-full bg-[#181a1f] border border-white/10 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-red-500" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 mb-2">Popüler Etiketler</label>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="quickSearchTag('BUZ')" class="text-xs bg-white/5 hover:bg-red-600/20 border border-white/10 px-3 py-1.5 rounded-lg text-gray-200">❄️ Buz Diyarı M4</button>
+            <button type="button" onclick="quickSearchTag('XSUIT')" class="text-xs bg-white/5 hover:bg-red-600/20 border border-white/10 px-3 py-1.5 rounded-lg text-gray-200">👑 X-Suit</button>
+            <button type="button" onclick="quickSearchTag('DESTANSI')" class="text-xs bg-white/5 hover:bg-red-600/20 border border-white/10 px-3 py-1.5 rounded-lg text-gray-200">🔥 Destansı Gösteriş</button>
+            <button type="button" onclick="quickSearchTag('LAMBORGHINI')" class="text-xs bg-white/5 hover:bg-red-600/20 border border-white/10 px-3 py-1.5 rounded-lg text-gray-200">🏎️ Spor Araba</button>
+          </div>
+        </div>
+
+        <div class="flex gap-2.5 pt-2">
+          <button onclick="resetAllFilters(); closeModal('filterModal');" class="flex-1 bg-white/10 hover:bg-white/15 text-gray-200 font-semibold text-sm py-3 rounded-xl">
+            Sıfırla
+          </button>
+          <button onclick="applySearchFilter(); closeModal('filterModal');" class="flex-1 bg-[#e11d2e] hover:bg-[#c81424] text-white font-bold text-sm py-3 rounded-xl">
+            Sonuçları Göster
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 4: HESAP SATMAK İSTİYORUM MODALI
+  ========================================================== -->
+  <div id="sellModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#111316] border border-blue-500/30 w-full max-w-md rounded-2xl p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-white">Hesabını Hızlıca Sat</h3>
+        <button onclick="closeModal('sellModal')" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300">✕</button>
+      </div>
+      <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-4">
+        AZAT GAMING güvencesiyle hesabını anında nakite çevirebilirsin. Tek yapman gereken hesabının envanter videosunu çekip WhatsApp hattımıza göndermek!
+      </p>
+      <ul class="text-xs text-gray-400 space-y-2 mb-6 bg-black/40 p-3.5 rounded-xl border border-white/5">
+        <li>• Yükseltilebilir silahlar ve destansı kıyafetleri videoda gösterin.</li>
+        <li>• Bağlantı durumunu (Twitter, E-posta, Telefon) belirtin.</li>
+        <li>• Aklınızdaki fiyatı mesajınıza ekleyin.</li>
+      </ul>
+      <a href="https://wa.me/905000000000?text=Merhaba%20AZAT%20GAMING,%20hesabımı%20satmak%20istiyorum.%20Video%20göndereceğim." target="_blank" rel="noopener noreferrer"
+         class="block w-full bg-[#22c55e] hover:bg-[#16a34a] text-[#052e16] font-extrabold text-sm py-3.5 rounded-xl text-center">
+        WhatsApp Üzerinden Video Gönder
+      </a>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 5: HESAP KİRALAMAK İSTİYORUM MODALI
+  ========================================================== -->
+  <div id="rentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#111316] border border-emerald-500/30 w-full max-w-md rounded-2xl p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-white">Hesap Kiralama Hizmeti</h3>
+        <button onclick="closeModal('rentModal')" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300">✕</button>
+      </div>
+      <a href="https://wa.me/905301759556?text=Merhaba%2C%20PUBG%20Mobile%20hesab%C4%B1m%C4%B1%20satmak%20istiyorum.%20Video%20g%C3%B6nderece%C4%9Fim." target="_blank" rel="noopener noreferrer"
+         class="block w-full bg-[#22c55e] hover:bg-[#16a34a] text-[#052e16] font-extrabold text-sm py-3.5 rounded-xl text-center">
+        WhatsApp Üzerinden Video Gönder
+      </a>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 5: HESAP KİRALAMAK İSTİYORUM MODALI
+  ========================================================== -->
+  <div id="rentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#111316] border border-emerald-500/30 w-full max-w-md rounded-2xl p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-white">Hesap Kiralama Hizmeti</h3>
+        <button onclick="closeModal('rentModal')" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300">✕</button>
+      </div>
+      <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-5">
+        Saatlik ve günlük VIP PUBG Mobile hesap kiralama işlemlerimiz aktif olarak resmi Telegram kanalımız üzerinden yürütülmektedir.
+      </p>
+      <a href="https://t.me/azatrentgmng" target="_blank" rel="noopener noreferrer"
+         class="block w-full bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-bold text-sm py-3.5 rounded-xl text-center">
+        Telegram Kanalına Katıl →
+      </a>
+    </div>
+  </div>
+
+  <!-- Bildirim Toast Kutusu -->
+  <div id="toast-box" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-xl">
+    İşlem başarılı!
+  </div>
+
+  <!-- =========================================================
+       JAVASCRIPT UYGULAMA MANTIĞI
+  ========================================================== -->
+  <script>
+    /**
+     * 1. Yeni Nesil Keskin Pro-Espor 'AZAT × GAMING' Logo Oluşturucu
+     * - 'AZAT': Eğik (italic/slanted) keskin geometrik Orbitron tipografisi, metalik gümüş-beyaz geçiş,
+     *   koyu bevel gölge katmanı ve harflerin arasından geçen keskin turkuaz-zümrüt lazer kesiği.
+     * - '×': Parlayan ayırıcı.
+     * - 'GAMING': Elektrik mavisi / camgöbeği neon parlamalı dinamik italik spor tipografisi ve fırça çizgisi.
+     */
+    function createAzatGamingLogoSVG(isHero = false) {
+      const uid = isHero ? 'hero' : 'hdr';
+      const width = isHero ? 330 : 198;
+      const height = isHero ? 68 : 42;
+
+      return `
+        <svg width="${width}" height="${height}" viewBox="0 0 460 92" fill="none" xmlns="http://www.w3.org/2000/svg" class="select-none overflow-visible">
+          <defs>
+            <!-- AZAT Metalik Gümüş-Beyaz Gradyan -->
+            <linearGradient id="azatChrome-${uid}" x1="0" y1="18" x2="0" y2="72" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="46%" stop-color="#f1f5f9"/>
+              <stop offset="52%" stop-color="#94a3b8"/>
+              <stop offset="100%" stop-color="#e2e8f0"/>
+            </linearGradient>
+
+            <!-- Turkuaz-Zümrüt Keskin Lazer Kesiği Gradyanı -->
+            <linearGradient id="razorSlash-${uid}" x1="12" y1="52" x2="215" y2="38" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="50%" stop-color="#22d3ee"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+
+            <!-- GAMING Elektrik Mavisi / Camgöbeği Neon Gradyanı -->
+            <linearGradient id="gamingElectric-${uid}" x1="238" y1="20" x2="445" y2="74" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#60a5fa"/>
+              <stop offset="45%" stop-color="#2563eb"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+
+            <!-- GAMING Neon Alt Parlama Filtresi -->
+            <filter id="blueGlow-${uid}" x="-15%" y="-25%" width="130%" height="150%">
+              <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2563eb" flood-opacity="0.65"/>
+              <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.85"/>
+            </filter>
+
+            <!-- AZAT Koyu Bevel Kontur Filtresi -->
+            <filter id="azatBevel-${uid}" x="-10%" y="-15%" width="120%" height="135%">
+              <feDropShadow dx="0" dy="4" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.9"/>
+            </filter>
+          </defs>
+
+          <!-- ====================================================
+               SOL BLOK: 'AZAT' KESKİN PRO-ESPOR TİPOGRAFİSİ
+          ===================================================== -->
+          <g filter="url(#azatBevel-${uid})">
+            <!-- Arka Plan Keskin İtalik Kalkan Plakası -->
+            <polygon points="18,16 212,16 198,76 4,76" fill="#0d1117" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+            <!-- Sol Kenar Zümrüt-Turkuaz Vurgu Çizgisi -->
+            <polygon points="14,16 21,16 7,76 0,76" fill="url(#razorSlash-${uid})"/>
+
+            <!-- Kalın Koyu Kontur Katmanı -->
+            <text x="111" y="61" text-anchor="middle"
+                  font-family="'Orbitron', sans-serif" font-weight="900" font-style="italic"
+                  font-size="45" letter-spacing="2"
+                  stroke="#05070a" stroke-width="7" stroke-linejoin="round"
+                  fill="#05070a">AZAT</text>
+
+            <!-- Ana Krom Metalik 'AZAT' Yazısı -->
+            <text x="111" y="61" text-anchor="middle"
+                  font-family="'Orbitron', sans-serif" font-weight="900" font-style="italic"
+                  font-size="45" letter-spacing="2"
+                  fill="url(#azatChrome-${uid})">AZAT</text>
+
+            <!-- Harflerin Üzerinden Geçen Keskin Camgöbeği-Zümrüt Lazer Kesiği -->
+            <polygon points="10,48 206,41 203,44.5 8,51.5" fill="url(#razorSlash-${uid})" opacity="0.92"/>
+          </g>
+
+          <!-- ====================================================
+               ORTA PARLAYAN '×' AYIRICI
+          ===================================================== -->
+          <text x="223" y="55" text-anchor="middle"
+                font-family="'Orbitron', sans-serif" font-weight="900"
+                font-size="20" fill="#38bdf8">×</text>
+
+          <!-- ====================================================
+               SAĞ BLOK: 'GAMING' ELEKTRİK MAVİSİ NEON TİPOGRAFİ
+          ===================================================== -->
+          <g filter="url(#blueGlow-${uid})">
+            <!-- Koyu Kontur Katmanı -->
+            <text x="242" y="62"
+                  font-family="'Orbitron', sans-serif" font-weight="900" font-style="italic"
+                  font-size="40" letter-spacing="1"
+                  stroke="#050811" stroke-width="6" stroke-linejoin="round"
+                  fill="#050811">GAMING</text>
+
+            <!-- Ana Elektrik Mavisi / Camgöbeği 'GAMING' Yazısı -->
+            <text x="242" y="62"
+                  font-family="'Orbitron', sans-serif" font-weight="900" font-style="italic"
+                  font-size="40" letter-spacing="1"
+                  fill="url(#gamingElectric-${uid})">GAMING</text>
+
+            <!-- Alt Hız / Fırça Vurgusu -->
+            <polygon points="244,70 442,70 435,74.5 239,74.5" fill="url(#gamingElectric-${uid})"/>
+          </g>
+        </svg>
+      `;
+    }
+
+    // Logoları DOM'a yerleştir
+    document.getElementById('header-logo-container').innerHTML = createAzatGamingLogoSVG(false);
+    document.getElementById('hero-logo-container').innerHTML = createAzatGamingLogoSVG(true);
+
+    /**
+     * 2. Başlangıç Örnek İlan Verileri (Kullanıcı kendi fotoğraflarını ekleyip değiştirebilir)
+     */
+    const defaultAccounts = [
+      {
+        id: '#090412',
+        category: 'yeni',
+        badgeText: 'YENİ',
+        badgeColor: 'bg-[#16a34a]',
+        title: '2x M4( BUZ MAX ) + 2 XSUIT',
+        price: '16.500 ₺',
+        specs: ['Buz Diyarı M416 Sv.7', 'Firavun X-Suit', 'Kuzgun X-Suit', 'Destansı Gösteriş', '81 Seviye'],
+        description: 'Tertemiz ilk elden hesap. 2 adet Maksimum Seviye M416 ve 2 adet X-Suit mevcuttur. Bağlantılar temiz, anında devir teslim.',
+        image: createPlaceholderLobbySVG('#090412', '2x M4 BUZ MAX + 2 XSUIT', '#1e293b', '#38bdf8')
+      },
+      {
+        id: '#090398',
+        category: 'firsat',
+        badgeText: 'FIRSAT',
+        badgeColor: 'bg-[#e11d2e]',
+        title: 'BUZ M4 SV.7 + LAMBORGHINI + 68 DESTANSI',
+        price: '12.900 ₺',
+        specs: ['Buz M4 Sv.7', 'Lamborghini Aventador', '68 Destansı Öğe', 'Fatih Çerçeve'],
+        description: 'Günün özel fırsat hesabı! Spor araç deseni ve maksimum seviye Buz M416 ile dopdolu lobi.',
+        image: createPlaceholderLobbySVG('#090398', 'BUZ M4 SV.7 + LAMBORGHINI', '#27131a', '#f43f5e')
+      },
+      {
+        id: '#090375',
+        category: 'indirim',
+        badgeText: 'İNDİRİM',
+        badgeColor: 'bg-[#d97706]',
+        title: 'M416 MASKARA MAX + POSEIDON X-SUIT',
+        price: '11.200 ₺',
+        specs: ['Maskara M416 Sv.7', 'Poseidon X-Suit', 'AKM Buz Sv.5', '79 Seviye'],
+        description: 'Fiyatı düşen nadir hesap! Maskara M416 ölüm duyurusu ve Poseidon zırhı bir arada.',
+        image: createPlaceholderLobbySVG('#090375', 'MASKARA MAX + POSEIDON', '#11221c', '#10b981')
+      },
+      {
+        id: '#090341',
+        category: 'populer',
+        badgeText: 'POPÜLER',
+        badgeColor: 'bg-[#2563eb]',
+        title: '95 DESTANSI + 14 YÜKSELTİLEBİLİR SİLAH',
+        price: '19.800 ₺',
+        specs: ['Destansı Gösteriş', '14 Yükseltilebilir', 'Buz M4 Sv.7', 'M762 Midilli Sv.5'],
+        description: 'Koleksiyonluk yüksek destansı hesap. Tüm popüler silah kaplamaları ve nadir emojiler açıktır.',
+        image: createPlaceholderLobbySVG('#090341', '95 DESTANSI + 14 SİLAH', '#1a162b', '#818cf8')
+      }
+    ];
+
+    // Örnek Lobi Görseli Üretici (Kullanıcı kendi fotoğrafını yükleyene kadar şık bir lobi ekranı gösterir)
+    function createPlaceholderLobbySVG(id, label, bg1, accent) {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="${bg1}"/>
+              <stop offset="100%" stop-color="#090a0b"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="480" fill="url(#bg)"/>
+          <circle cx="400" cy="220" r="170" fill="${accent}" opacity="0.09"/>
+          <rect x="40" y="40" width="720" height="400" rx="20" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+          <text x="400" y="195" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-weight="800" font-size="26" letter-spacing="1">${label}</text>
+          <text x="400" y="235" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif" font-size="16">Kendi hesap fotoğrafınızı eklemek için sağ üstteki</text>
+          <text x="400" y="260" text-anchor="middle" fill="${accent}" font-family="Arial, sans-serif" font-weight="700" font-size="16">"📷 Fotoğraf Değiştir" butonuna dokunun</text>
+          <text x="120" y="110" fill="rgba(255,255,255,0.06)" font-family="Arial" font-weight="900" font-size="38" transform="rotate(-20 120,110)">AZAT GAMING</text>
+          <text x="520" y="390" fill="rgba(255,255,255,0.06)" font-family="Arial" font-weight="900" font-size="38" transform="rotate(-20 520,390)">AZAT GAMING</text>
+        </svg>
+      `;
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
+    // Durum Yönetimi (State)
+    let accounts = [];
+    let currentCategory = 'all';
+    let searchQuery = '';
+    let targetSwapIndex = null;
+    let uploadedNewPhotoDataUrl = '';
+
+    // LocalStorage'dan verileri yükle
+    function loadAccounts() {
+      try {
+        const saved = localStorage.getItem('azat_gaming_accounts_v1');
+        if (saved) {
+          accounts = JSON.parse(saved);
+        } else {
+          accounts = [...defaultAccounts];
+          saveAccounts();
+        }
+      } catch (e) {
+        accounts = [...defaultAccounts];
+      }
+    }
+
+    function saveAccounts() {
+      try {
+        localStorage.setItem('azat_gaming_accounts_v1', JSON.stringify(accounts));
+      } catch (e) {
+        showToast('Depolama sınırı doldu, daha küçük boyutlu fotoğraf seçin.');
+      }
+    }
+
+    /**
+     * 3. Sayfa Geçişleri (Ana Sayfa <-> Vitrin)
+     */
+    function navigateTo(view) {
+      const homeEl = document.getElementById('view-home');
+      const vitrinEl = document.getElementById('view-vitrin');
+      const headerSellBtn = document.getElementById('header-sell-btn');
+
+      if (view === 'vitrin') {
+        homeEl.classList.add('hidden');
+        vitrinEl.classList.remove('hidden');
+        headerSellBtn.classList.remove('hidden');
+        renderListings();
+      } else {
+        vitrinEl.classList.add('hidden');
+        homeEl.classList.remove('hidden');
+        headerSellBtn.classList.add('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /**
+     * 4. Vitrin Kartlarını Ekrana Çizme
+     */
+    function renderListings() {
+      const container = document.getElementById('listings-container');
+      const emptyState = document.getElementById('empty-state');
+      const countText = document.getElementById('active-count-text');
+
+      const filtered = accounts.map((acc, originalIndex) => ({ ...acc, originalIndex })).filter(acc => {
+        const matchesCat = currentCategory === 'all' || acc.category === currentCategory;
+        const q = searchQuery.trim().toLowerCase();
+        const matchesQuery = !q ||
+          acc.title.toLowerCase().includes(q) ||
+          acc.id.toLowerCase().includes(q) ||
+          acc.specs.some(s => s.toLowerCase().includes(q));
+        return matchesCat && matchesQuery;
+      });
+
+      const activeTotal = accounts.filter(a => a.category !== 'satildi').length;
+      countText.textContent = `${filtered.length} ilan gösteriliyor (Toplam ${activeTotal} aktif ilan)`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.innerHTML = filtered.map(acc => `
+        <article class="relative pt-3.5 group">
+          <!-- Üst Orta Yüzen Durum Rozeti (Referans Görsel 2: YENİ) -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20">
+            <span class="${acc.badgeColor} text-white text-[11px] font-extrabold tracking-wider uppercase px-4 py-1 rounded-md shadow-lg">
+              ${acc.badgeText}
+            </span>
+          </div>
+
+          <!-- Hesap Ekran Görüntüsü Kutusu -->
+          <div onclick="openDetailModal(${acc.originalIndex})" class="relative rounded-t-2xl overflow-hidden bg-[#131519] border-x border-t border-white/10 aspect-[16/10] cursor-pointer">
+            <img src="${acc.image}" alt="${acc.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
+            
+            <!-- İnce Filigran Katmanı -->
+            <div class="watermark-overlay absolute inset-0 pointer-events-none"></div>
+
+            <!-- Hızlı Fotoğraf Değiştir Butonu (Kullanıcının fotoğraf yüklemesi için) -->
+            <button type="button" onclick="event.stopPropagation(); triggerQuickPhotoSwap(${acc.originalIndex})"
+                    class="absolute top-3 right-3 z-20 bg-black/75 hover:bg-red-600 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-lg border border-white/15 backdrop-blur-md flex items-center gap-1 transition-colors">
+              <span>📷</span>
+              <span>Fotoğraf Değiştir</span>
+            </button>
+
+            <!-- Sağ Alt İlan ID Etiketi (#090412) -->
+            <div class="absolute bottom-2.5 right-2.5 z-10 bg-black/80 backdrop-blur-sm text-white font-mono font-bold text-xs px-2.5 py-1 rounded-md border border-white/10">
+              ${acc.id}
+            </div>
+          </div>
+
+          <!-- Alt Kırmızı Çizgili İlan Başlığı & Detay Kutusu -->
+          <div onclick="openDetailModal(${acc.originalIndex})" class="listing-footer-box rounded-b-2xl p-4 cursor-pointer">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span class="block text-[10px] font-extrabold tracking-wider uppercase text-[#ef233c] mb-0.5">
+                  İLAN BAŞLIĞI
+                </span>
+                <h3 class="text-sm sm:text-base font-extrabold text-white leading-snug">
+                  ${acc.title}
+                </h3>
+              </div>
+              <span class="shrink-0 text-sm sm:text-base font-extrabold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
+                ${acc.price}
+              </span>
+            </div>
+
+            <!-- Özellik Etiketleri & İncele Satırı -->
+            <div class="mt-3 pt-3 border-t border-white/[0.06] flex items-center justify-between gap-2">
+              <div class="flex flex-wrap gap-1.5 overflow-hidden max-h-6">
+                ${acc.specs.slice(0, 2).map(sp => `
+                  <span class="text-[10px] font-medium text-gray-300 bg-white/[0.06] px-2 py-0.5 rounded">
+                    ${sp}
+                  </span>
+                `).join('')}
+              </div>
+              <div class="shrink-0 flex items-center gap-2">
+                <a href="https://wa.me/905301759556?text=${encodeURIComponent(`Merhaba AZAT GAMING, ${acc.id} kodlu "${acc.title}" (${acc.price}) ilanını satın almak istiyorum.`)}"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="event.stopPropagation()"
+                   class="text-[11px] font-bold bg-[#22c55e] hover:bg-[#16a34a] text-[#052e16] px-2.5 py-1 rounded-md transition-colors">
+                  WhatsApp
+                </a>
+                <span class="text-xs font-bold text-red-400 group-hover:translate-x-0.5 transition-transform">
+                  İncele →
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /**
+     * 5. Kategori ve Arama Filtreleri
+     */
+    function setCategoryFilter(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'cat-pill active-pill px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#e11d2e] text-white border border-red-500/40 transition-all';
+        } else {
+          btn.className = 'cat-pill px-3.5 py-2 rounded-xl text-xs font-medium bg-[#18191c] text-gray-300 hover:bg-[#222428] border border-white/[0.06] transition-all';
+        }
+      });
+      renderListings();
+    }
+
+    function applySearchFilter() {
+      searchQuery = document.getElementById('search-input').value;
+      renderListings();
+    }
+
+    function quickSearchTag(tag) {
+      document.getElementById('search-input').value = tag;
+      searchQuery = tag;
+      closeModal('filterModal');
+      renderListings();
+    }
+
+    function resetAllFilters() {
+      currentCategory = 'all';
+      searchQuery = '';
+      document.getElementById('search-input').value = '';
+      setCategoryFilter('all');
+    }
+
+    /**
+     * 6. Fotoğraf Yükleme & Değiştirme İşlemleri (Görsel Sıkıştırma Destekli)
+     */
+    function compressImageToDataURL(file, callback) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxWidth = 960;
+          const scale = Math.min(1, maxWidth / img.width);
+          canvas.width = img.width * scale;
+          canvas.height = img.height * scale;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          callback(canvas.toDataURL('image/jpeg', 0.82));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function triggerQuickPhotoSwap(index) {
+      targetSwapIndex = index;
+      const input = document.getElementById('quick-photo-input');
+      input.value = '';
+      input.click();
+    }
+
+    function handleQuickPhotoChange(event) {
+      const file = event.target.files[0];
+      if (!file || targetSwapIndex === null) return;
+
+      compressImageToDataURL(file, (dataUrl) => {
+        accounts[targetSwapIndex].image = dataUrl;
+        saveAccounts();
+        renderListings();
+        // Eğer detay modalı açıksa oradaki görseli de güncelle
+        const detailImg = document.getElementById('modal-detail-img');
+        if (!document.getElementById('detailModal').classList.contains('hidden')) {
+          detailImg.src = dataUrl;
+        }
+        showToast('Hesap fotoğrafı güncellendi!');
+      });
+    }
+
+    function previewNewPhoto(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      compressImageToDataURL(file, (dataUrl) => {
+        uploadedNewPhotoDataUrl = dataUrl;
+        const preview = document.getElementById('new-photo-preview');
+        const placeholder = document.getElementById('new-photo-placeholder');
+        preview.src = dataUrl;
+        preview.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      });
+    }
+
+    function openAddModal() {
+      uploadedNewPhotoDataUrl = '';
+      document.getElementById('new-photo-preview').classList.add('hidden');
+      document.getElementById('new-photo-placeholder').classList.remove('hidden');
+      document.getElementById('new-id').value = '#090' + Math.floor(420 + Math.random() * 500);
+      openModal('addModal');
+    }
+
+    function handleAddAccount(event) {
+      event.preventDefault();
+      const id = document.getElementById('new-id').value.trim();
+      const category = document.getElementById('new-category').value;
+      const title = document.getElementById('new-title').value.trim().toUpperCase();
+      const price = document.getElementById('new-price').value.trim();
+      const specsRaw = document.getElementById('new-specs').value.trim();
+
+      const badgeMap = {
+        yeni: { text: 'YENİ', color: 'bg-[#16a34a]' },
+        firsat: { text: 'FIRSAT', color: 'bg-[#e11d2e]' },
+        indirim: { text: 'İNDİRİM', color: 'bg-[#d97706]' },
+        populer: { text: 'POPÜLER', color: 'bg-[#2563eb]' },
+        satildi: { text: 'SATILDI', color: 'bg-zinc-600' }
+      };
+
+      const specs = specsRaw
+        ? specsRaw.split(',').map(s => s.trim()).filter(Boolean)
+        : ['Temiz Bağlantı', 'Anında Teslim'];
+
+      const finalImage = uploadedNewPhotoDataUrl || createPlaceholderLobbySVG(id, title, '#1e293b', '#ef233c');
+
+      accounts.unshift({
+        id: id.startsWith('#') ? id : '#' + id,
+        category,
+        badgeText: badgeMap[category].text,
+        badgeColor: badgeMap[category].color,
+        title,
+        price: price.includes('₺') ? price : price + ' ₺',
+        specs,
+        description: 'AZAT GAMING güvencesiyle onaylı PUBG Mobile hesabı. Detaylı bilgi ve canlı video için WhatsApp üzerinden ulaşabilirsiniz.',
+        image: finalImage
+      });
+
+      saveAccounts();
+      closeModal('addModal');
+      navigateTo('vitrin');
+      showToast('Yeni ilan başarıyla vitrine eklendi!');
+      event.target.reset();
+    }
+
+    /**
+     * 7. Hesap Detay Modalı ve Genel Modal Kontrolleri
+     */
+    function openDetailModal(index) {
+      const acc = accounts[index];
+      if (!acc) return;
+
+      document.getElementById('modal-detail-id').textContent = acc.id;
+      const badgeEl = document.getElementById('modal-detail-badge');
+      badgeEl.textContent = acc.badgeText;
+      badgeEl.className = `text-[11px] font-bold px-2.5 py-0.5 rounded text-white ${acc.badgeColor}`;
+
+      document.getElementById('modal-detail-img').src = acc.image;
+      document.getElementById('modal-detail-title').textContent = acc.title;
+      document.getElementById('modal-detail-price').textContent = acc.price;
+      document.getElementById('modal-detail-desc').textContent = acc.description;
+
+      document.getElementById('modal-detail-specs').innerHTML = acc.specs.map(s => `
+        <span class="text-xs font-medium bg-white/[0.07] text-gray-200 border border-white/10 px-3 py-1 rounded-lg">${s}</span>
+      `).join('');
+
+      document.getElementById('modal-swap-photo-btn').onclick = () => triggerQuickPhotoSwap(index);
+
+      const waMsg = encodeURIComponent(`Merhaba AZAT GAMING, ${acc.id} kodlu "${acc.title}" (${acc.price}) ilanını satın almak istiyorum.`);
+      document.getElementById('modal-whatsapp-link').href = `https://wa.me/905301759556?text=${waMsg}`;
+
+      openModal('detailModal');
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-box');
+      toast.textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 2800);
+    }
+
+    // Başlat
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAccounts();
+    });
+  </script>
+</body>
+</html>
+```
